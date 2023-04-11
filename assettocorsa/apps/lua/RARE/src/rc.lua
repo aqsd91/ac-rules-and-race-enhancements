@@ -156,29 +156,29 @@ local function raceSession(lastUpdate, racecontrol, config, driver)
 		end
 	end
 
-	-- notifications handler
-	if lastUpdate then
-		if not lastUpdate.drsEnabled and racecontrol.drsEnabled then
-			notifications.popup("DRS ENABLED")
-		end
-
-		if not lastUpdate.wetTrack and racecontrol.wetTrack then
-			notifications.popup("DRS DISABLED - WET TRACK")
-		end
-
-		if lastUpdate.wetTrack and not racecontrol.wetTrack then
-			notifications.popup("DRS ENABLED IN 2 LAPS")
-		end
-	end
-
 	if raceRules.DRS_RULES == 1 then
 		drs.controller(racecontrol, driver, racecontrol.drsEnabled)
+
+		-- notifications handler
+		if lastUpdate then
+			if not lastUpdate.drsEnabled and racecontrol.drsEnabled then
+				notifications.popup("DRS ENABLED")
+			end
+
+			if not lastUpdate.wetTrack and racecontrol.wetTrack then
+				notifications.popup("DRS DISABLED - WET TRACK")
+			end
+
+			if lastUpdate.wetTrack and not racecontrol.wetTrack then
+				notifications.popup("DRS ENABLED IN 2 LAPS")
+			end
+		end
 	else
 		driver.drsAvailable = true
 	end
 
 	if driver.car.isAIControlled then
-		ai.controller(aiRules, driver)
+		ai.controller(raceRules, aiRules, driver)
 	end
 
 	return driver
