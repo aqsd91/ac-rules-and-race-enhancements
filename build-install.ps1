@@ -1,5 +1,5 @@
 & "$PSScriptRoot\build.ps1"
 
-$ac_dir = "E:\Games\Steam\steamapps\common\"
+$ac_dir = "D:\Games\steamapps\common\"
 
 Copy-Item "$PSScriptRoot\assettocorsa\" -Destination $ac_dir -Recurse -Force

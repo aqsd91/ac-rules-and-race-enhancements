@@ -1,6 +1,6 @@
 {
     "Lua.workspace.library": [
-        "e:\\Games\\Steam\\steamapps\\common\\assettocorsa/extension/internal/lua-sdk/ac_apps"
+        "D:\\Games\\steamapps\\common\\assettocorsa\\extension\\internal\\lua-sdk\\ac_apps"
     ],
     "Lua.workspace.preloadFileSize": 2000,
     "Lua.runtime.version": "LuaJIT",
