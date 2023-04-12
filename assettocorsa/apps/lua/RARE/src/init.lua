@@ -98,7 +98,9 @@ local function createDrivers(sim)
 		end
 
 		if driver.car.isAIControlled then
-			setAIFuelTankMax(sim, driver)
+			if RARECONFIG.data.AI.AI_TANK_FILL == 1 then
+				setAIFuelTankMax(sim, driver)
+			end
 			setAITyreCompound(driver, driver.tyreCompoundsAvailable)
 
 			if FIRST_LAUNCH then
@@ -151,6 +153,8 @@ local function loadSettings(sim)
 				DRS_ACTIVATION_LAP = (ac.INIConfig.OptionalNumber == nil) and ac.INIConfig.OptionalNumber or 3,
 				DRS_GAP_DELTA = (ac.INIConfig.OptionalNumber == nil) and ac.INIConfig.OptionalNumber or 1000,
 				DRS_WET_DISABLE = (ac.INIConfig.OptionalNumber == nil) and ac.INIConfig.OptionalNumber or 1,
+				RESTRICT_COMPOUNDS = (ac.INIConfig.OptionalNumber == nil) and ac.INIConfig.OptionalNumber or 1,
+				CORRECT_COMPOUNDS_COLORS = (ac.INIConfig.OptionalNumber == nil) and ac.INIConfig.OptionalNumber or 1,
 				VSC_RULES = (ac.INIConfig.OptionalNumber == nil) and ac.INIConfig.OptionalNumber or 0,
 				VSC_INIT_TIME = (ac.INIConfig.OptionalNumber == nil) and ac.INIConfig.OptionalNumber or 300,
 				VSC_DEPLOY_TIME = (ac.INIConfig.OptionalNumber == nil) and ac.INIConfig.OptionalNumber or 300,
@@ -166,6 +170,7 @@ local function loadSettings(sim)
 				AI_RELATIVE_SCALING = (ac.INIConfig.OptionalNumber == nil) and ac.INIConfig.OptionalNumber or 0,
 				AI_RELATIVE_LEVEL = (ac.INIConfig.OptionalNumber == nil) and ac.INIConfig.OptionalNumber or 100,
 				AI_MGUK_CONTROL = (ac.INIConfig.OptionalNumber == nil) and ac.INIConfig.OptionalNumber or 1,
+				AI_TANK_FILL = (ac.INIConfig.OptionalNumber == nil) and ac.INIConfig.OptionalNumber or 1,
 			},
 			AUDIO = {
 				MASTER = (ac.INIConfig.OptionalNumber == nil) and ac.INIConfig.OptionalNumber or 100,

@@ -122,7 +122,7 @@ function settingsMenu(sim)
 				-- end
 				-- ui.newLine(1)
 
-				ui.header("PIT STOPS")
+				ui.header("FUEL")
 				utils.slider(
 					RARECONFIG,
 					"RULES",
@@ -140,6 +140,39 @@ function settingsMenu(sim)
 				)
 
 				ui.newLine(1)
+
+				ui.header("TYRE COMPOUNDS")
+				utils.slider(
+					RARECONFIG,
+					"RULES",
+					"RESTRICT_COMPOUNDS",
+					0,
+					1,
+					1,
+					true,
+					RARECONFIG.data.RULES.RESTRICT_COMPOUNDS == 1 and "Restrict Compound Choice: ENABLED"
+						or "Restrict Compound Choice: DISABLED",
+					"Enable or disable restricting compound choice to user defined set\nRequires configration in order to work",
+					function(v)
+						return math.round(v, 0)
+					end
+				)
+				utils.slider(
+					RARECONFIG,
+					"RULES",
+					"CORRECT_COMPOUNDS_COLORS",
+					0,
+					1,
+					1,
+					true,
+					RARECONFIG.data.RULES.CORRECT_COMPOUNDS_COLORS == 1 and "HMS Compound Colors: ENABLED"
+						or "HMS Compound Colors: DISABLED",
+					"Enable or disable changing the compound colors to reflect the Hard (white) Medium (yellow) and Soft (red) compound\nRequires configration in order to work",
+					function(v)
+						return math.round(v, 0)
+					end
+				)
+
 				-- ui.newLine(5)
 
 				-- if ui.button("APPLY SETTINGS", vec2(ui.windowWidth()-40,25), ui.ButtonFlags.None) then
@@ -212,26 +245,6 @@ function settingsMenu(sim)
 						return math.round(v, 0)
 					end
 				)
-
-				if ac.getPatchVersionCode() >= 2278 then
-					ui.newLine(1)
-
-					utils.slider(
-						RARECONFIG,
-						"AI",
-						"AI_MGUK_CONTROL",
-						0,
-						1,
-						1,
-						true,
-						RARECONFIG.data.AI.AI_MGUK_CONTROL == 1 and "AI Dynamic MGUK: ENABLED"
-							or "AI Dynamic MGUK: DISABLED",
-						"Enables AI to make MGUK changes during the race",
-						function(v)
-							return math.round(v, 0)
-						end
-					)
-				end
 
 				ui.newLine(1)
 
@@ -321,6 +334,43 @@ function settingsMenu(sim)
 					)
 
 					ui.newLine(1)
+
+					ui.header("FUEL")
+					utils.slider(
+						RARECONFIG,
+						"AI",
+						"AI_TANK_FILL",
+						0,
+						1,
+						1,
+						true,
+						RARECONFIG.data.AI.AI_TANK_FILL == 1 and "Fill Fuel Tank: ENABLED" or "Fill Fuel Tank: DISABLED",
+						"Enable or disable refueling AI car's fuel tank with enough fuel for the whole race, given the capacity is high enough",
+						function(v)
+							return math.round(v, 0)
+						end
+					)
+
+					if ac.getPatchVersionCode() >= 2278 then
+						ui.newLine(1)
+
+						ui.header("MISC")
+						utils.slider(
+							RARECONFIG,
+							"AI",
+							"AI_MGUK_CONTROL",
+							0,
+							1,
+							1,
+							true,
+							RARECONFIG.data.AI.AI_MGUK_CONTROL == 1 and "AI Dynamic MGUK: ENABLED"
+								or "AI Dynamic MGUK: DISABLED",
+							"Enables AI to make MGUK changes during the race",
+							function(v)
+								return math.round(v, 0)
+							end
+						)
+					end
 
 					if not sim.isInMainMenu and ac.getPatchVersionCode() >= 2278 then
 						if driver.car.isAIControlled then
